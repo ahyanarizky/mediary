@@ -1,61 +1,85 @@
 let ModelRecord = require('../models/record.js')
 
 let viewAllRecord = (req, res, next) => {
-  ModelRecord.find({}, (err, records) => {
-    if(err){
-      console.log(err);
-    }else{
-      res.render('viewAllRecord', {title: "mediary", records: records})
-    }
-  })
+  if (req.user) {
+    ModelRecord.find({}, (err, records) => {
+      if(err){
+        console.log(err);
+      }else{
+        res.render('viewAllRecord', {title: "mediary", records: records})
+      }
+    })
+  } else {
+    res.redirect('/')
+  }
 }
 
 let formAddRecord = (req, res, next) => {
-  res.render('formAddPatient', {title: "mediary"})
+  if (req.user) {
+    res.render('formAddPatient', {title: "mediary"})
+  } else {
+    res.redirect('/')
+  }
 }
 
 let processAddRecord = (req, res, next) => {
-  ModelRecord.create(req.body, (err, record) => {
-    if(err){
-      console.log(err);
-    }else{
-      res.redirect('/dashboard/patient/record')
-    }
-  })
+  if (req.user) {
+    ModelRecord.create(req.body, (err, record) => {
+      if(err){
+        console.log(err);
+      }else{
+        res.redirect('/dashboard/patient/record')
+      }
+    })
+  } else {
+    res.redirect('/')
+  }
 }
 
 let formEditRecord = (req, res, next) => {
-  res.render('formEditRecord', {title: "mediary"})
+  if (req.user) {
+    res.render('formEditRecord', {title: "mediary"})
+  } else {
+    res.redirect('/')
+  }
 }
 
 let processEditRecord = (req, res, next) => {
-  ModelRecord.update({
-    _id: req.params.id
-  }, req.body, (err, recordUpdated) => {
-    if(err){
-      console.log(err);
-    }else{
-      console.log(`Data has been updated`);
-      res.redirect('/dashboard/patient/record')
-    }
-  })
+  if (req.user) {
+    ModelRecord.update({
+      _id: req.params.id
+    }, req.body, (err, recordUpdated) => {
+      if(err){
+        console.log(err);
+      }else{
+        console.log(`Data has been updated`);
+        res.redirect('/dashboard/patient/record')
+      }
+    })
+  } else {
+    res.redirect('/')
+  }
 }
 
 let processDeleteRecord = (req, res, next) => {
-  ModelRecord.findById(req.params.id, (err, recordDeleted) => {
-    if(err){
-      console.log(err);
-    }else{
-      recordDeleted.remove((err, recordRemoved) => {
-        if(err){
-          console.log(err);
-        }else{
-          console.log(`Data has been deleted`);
-          res.redirect('/dashboard/patient/record')
-        }
-      })
-    }
-  })
+  if (req.user) {
+    ModelRecord.findById(req.params.id, (err, recordDeleted) => {
+      if(err){
+        console.log(err);
+      }else{
+        recordDeleted.remove((err, recordRemoved) => {
+          if(err){
+            console.log(err);
+          }else{
+            console.log(`Data has been deleted`);
+            res.redirect('/dashboard/patient/record')
+          }
+        })
+      }
+    })
+  } else {
+    res.redirect('/')
+  }
 }
 
 module.exports = {
