@@ -9,7 +9,7 @@ let Model = require('../models/Institution')
 
 
 let viewIndex = (req, res, next) => {
-  res.send('viewIndex')
+  res.render('index')
 }
 
 let formLogin = (req, res, next) => {
