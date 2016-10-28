@@ -1,5 +1,5 @@
-let ModelPatient = require('../models/Patient')
-let ModelRecord = require('../models/Record')
+// let ModelPatient = require('../models/Patient')
+// let ModelRecord = require('../models/Record')
 
 let viewAllPatient = (req, res, next) => {
   ModelPatient.find({}, (err, patients) => {

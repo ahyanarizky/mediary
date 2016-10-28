@@ -5,11 +5,11 @@ var router = express.Router();
 var user = require('../models/institution.js')
 const passport = require('passport')
 
-let Model = require('../models/Institution')
+let Institution = require('../models/institution')
 
 
 let viewIndex = (req, res, next) => {
-  res.send('viewIndex')
+  res.render('index', {title: "mediary"})
 }
 
 let formLogin = (req, res, next) => {
@@ -25,9 +25,17 @@ let formRegister = (req, res, next) => {
 }
 
 let proccessRegister = (req, res, next) => {
-  Model.create(req.body, (err, Institution) => {
+  Institution.register(new Institution({
+    IID: req.body.IID,
+    name: req.body.name,
+    address: req.body.address,
+    type: req.body.type,
+    username: req.body.username,
+    password: req.body.password
+  }), req.body.password, (err, Institution) => {
     if(err){
       console.log(err);
+      return res.render('register')
     }else {
       res.redirect('/dashboard')
     }

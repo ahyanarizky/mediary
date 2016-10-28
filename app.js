@@ -31,11 +31,24 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret : 'secret',
+  resave : false,
+  saveUninitialized : false,
+  cookie : {
+    maxAge : 60 * 60
+  }
+}))
+
 
 app.use('/', routes);
 app.use('/dashboard', dashboard);
 app.use('/dashboard/patient', patient);
 app.use('/dashboard/patient/record', record);
+
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
