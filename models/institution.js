@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var passportLocalMongoose = require('passport-local-mongoose');
 
 var insSchema = mongoose.Schema({
-  IID: Number,
+  IID: String,
   name: String,
   address: String,
   category: String,

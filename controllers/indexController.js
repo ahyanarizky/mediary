@@ -27,6 +27,7 @@ let processLogin = (req, res, next) => {
 }
 
 let proccessRegister = (req, res, next) => {
+  console.log(req.body);
   ModelInstitution.register({
     IID: req.body.iid,
     name: req.body.name,
@@ -36,8 +37,10 @@ let proccessRegister = (req, res, next) => {
   }, req.body.password, function(err, result) {
     console.log(result);
     if (err) {
+      console.log(err);
       res.render('register', {alert: 'Registration unsuccessfull'})
     } else {
+      console.log(`sukses`);
       passport.authenticate('local')(req, res, function(){
         req.session.save(function (err, next) {
           if (err) return next(err)
