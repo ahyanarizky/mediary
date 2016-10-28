@@ -1,5 +1,4 @@
 let ModelPatient = require('../models/patient.js')
-let ModelRecord = require('../models/record.js')
 
 let viewAllPatient = (req, res, next) => {
   ModelPatient.find({}, (err, patients) => {
@@ -16,7 +15,7 @@ let formAddPatient = (req, res, next) => {
 }
 
 let processAddPatient = (req, res, next) => {
-  ModelRecord.create(req.body, (err, record) => {
+  ModelPatient.create(req.body, (err, record) => {
     if(err){
       console.log(err);
     }else{
