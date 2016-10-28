@@ -5,7 +5,7 @@ var router = express.Router();
 var user = require('../models/institution.js')
 const passport = require('passport')
 
-let Model = require('../models/Institution')
+let ModelInstitution = require('../models/institution.js')
 
 
 let viewIndex = (req, res, next) => {
@@ -25,7 +25,7 @@ let formRegister = (req, res, next) => {
 }
 
 let proccessRegister = (req, res, next) => {
-  Model.create(req.body, (err, Institution) => {
+  ModelInstitution.create(req.body, (err, Institution) => {
     if(err){
       console.log(err);
     }else {

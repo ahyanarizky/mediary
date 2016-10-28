@@ -1,4 +1,4 @@
-let ModelRecord = require('../models/Record')
+let ModelRecord = require('../models/record.js')
 
 let viewAllRecord = (req, res, next) => {
   ModelRecord.find({}, (err, records) => {
