@@ -28,7 +28,7 @@ let processAddPatient = (req, res, next) => {
       if(err){
         console.log(err);
       }else{
-        res.redirect('dashboard/patient')
+        res.redirect('/dashboard/patient')
       }
     })
   } else {

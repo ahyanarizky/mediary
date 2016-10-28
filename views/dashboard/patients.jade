@@ -101,7 +101,7 @@ html(lang='en')
                       td #{patients[i].phone}
                       td #{patients[i].BloodType}
                       td
-                        a.btn.btn-info(href='/dashboard/patient/detail/')
+                        a.btn.btn-info(href='/dashboard/patient/detail/#{patients[i]._id}')
                           span.glyphicon.glyphicon-eye-open
                           | Details
                         a(href='/dashboard/patient/edit/#{patients[i]._id}')
