@@ -37,7 +37,7 @@ html(lang='en')
           li.dropdown
             a.dropdown-toggle(href='#', data-toggle='dropdown')
               i.fa.fa-user
-              |  Nama Institusi
+              |  #{username}
               b.caret
             ul.dropdown-menu
               li
@@ -82,7 +82,7 @@ html(lang='en')
               form(role='form' action="/dashboard/patient/edit" method="post")
                 .form-group
                   label PID
-                  input.form-control(name='pid' placeholder="Patient's Identity Number" value="#{patients.PID}")
+                  input.form-control(name='PID' placeholder="Patient's Identity Number" value="#{patients.PID}")
                 .form-group
                   label Name
                   input.form-control(name='name' placeholder='Enter patient name' value="#{patients.name}")
@@ -91,27 +91,27 @@ html(lang='en')
                   input.form-control(type='date' name='birthdate' placeholder="Patient's Birthdate" value="#{patients.birthdate}")
                 .form-group
                   label Address
-                  textarea.form-control(rows='3')
+                  input.form-control(type='text' name='address' placeholder="Patient's Birthdate" value="#{patients.address}")
                 .form-group
                   label Phone Number
-                  input.form-control(name='phone_number' placeholder='Enter patient phone number' value="#{patients.phone}")
+                  input.form-control(type='text' name='phone' placeholder='Enter patient phone number' value="#{patients.phone}")
                 .form-group
                   label Radio Buttons
                   .radio
                     label
-                      input#A(type='radio', name='blood_type', value='A', checked='')
+                      input#A(type='radio', name='BloodType', value='A', checked='')
                       | A
                   .radio
                     label
-                      input#B(type='radio', name='blood_type', value='B')
+                      input#B(type='radio', name='BloodType', value='B')
                       | B
                   .radio
                     label
-                      input#O(type='radio', name='blood_type', value='O')
+                      input#O(type='radio', name='BloodType', value='O')
                       | O
                   .radio
                     label
-                      input#AB(type='radio', name='blood_type', value='AB')
+                      input#AB(type='radio', name='BloodType', value='AB')
                       | AB
                 .form-group
                   input(type='hidden' name='id' value='#{id}')

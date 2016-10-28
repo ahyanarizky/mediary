@@ -51,7 +51,7 @@ let processEditPatient = (req, res, next) => {
   ModelPatient.update({
     _id: req.body.id
   },{
-    PID: req.body.pid,
+    PID: req.body.PID,
     name: req.body.name,
     birthdate: req.body.birthdate,
     address: req.body.address,

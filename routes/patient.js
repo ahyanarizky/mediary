@@ -21,7 +21,7 @@ router.get('/edit/:id', controller.formEditPatient)
 router.post('/edit', controller.processEditPatient)
 
 // PROCESS DELETE PATIENT
-router.delete('/delete/:id', controller.processDeletePatient)
+router.get('/delete/:id', controller.processDeletePatient)
 
 
 module.exports = router;
