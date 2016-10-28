@@ -37,14 +37,19 @@ let processAddPatient = (req, res, next) => {
 }
 
 let formEditPatient = (req, res, next) => {
-  if (req.user) {
-    res.render('dashboard/edit_patient', {title: "mediary"})
-  } else {
-    res.redirect('/')
-  }
+  ModelPatient.find({
+    _id: req.params.id
+  }, (err, patients) => {
+    if (req.user) {
+      res.render('dashboard/edit_patient', {title: "mediary", patients: patients})
+    } else {
+      res.redirect('/')
+    }
+  })
 }
 
 let processEditPatient = (req, res, next) => {
+  console.log(req.body);
   if (req.user) {
     ModelPatient.update({
       _id: req.body.id
@@ -59,7 +64,7 @@ let processEditPatient = (req, res, next) => {
       if(err){
         console.log(err);
       }else{
-        res.redirect('/')
+        res.redirect('/dashboard/patient')
       }
     })
   } else {
