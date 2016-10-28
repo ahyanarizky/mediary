@@ -32,16 +32,15 @@ html(lang='en')
           // Collect the nav links, forms, and other content for toggling
           .collapse.navbar-collapse.navbar-right.navbar-main-collapse
             ul.nav.navbar-nav
-              li.active
-                a(href='#intro') Home
               li
-                a(href='#') Register
+                a(href='/') Home
               li
-                a(href="#") Login
+                a.btn.btn-primary(href='/auth') Register/Login
+                // /bug
           // /.navbar-collapse
         // /.container
     block content
-    
+
     footer
       .container
         .row
@@ -126,12 +125,12 @@ html(lang='en')
                       Licensing information: https://bootstrapmade.com/license/
                       Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Medicio
                     a(href='https://bootstrapmade.com/free-business-bootstrap-themes-website-templates/') Business Bootstrap Themes
-                    |  by 
+                    |  by
                     a(href='https://bootstrapmade.com/') BootstrapMade
     a.scrollup(href='#')
       i.fa.fa-angle-up.active
 
-    
+
     // Core JavaScript Files
     script(src='js/jquery.min.js')
     script(src='js/bootstrap.min.js')

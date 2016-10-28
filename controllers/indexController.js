@@ -5,7 +5,6 @@ var router = express.Router();
 var user = require('../models/institution.js')
 const passport = require('passport')
 
-
 let ModelInstitution = require('../models/institution.js')
 
 
@@ -13,8 +12,8 @@ let viewIndex = (req, res, next) => {
   res.render('index', {title: "mediary"})
 }
 
-let formLogin = (req, res, next) => {
-  res.render('formLogin', {title: "mediary"})
+let formRegisterAndLogin = (req, res, next) => {
+  res.render('auth', {title: "mediary"})
 }
 
 let processLogin = (req, res, next) => {
@@ -27,25 +26,22 @@ let processLogin = (req, res, next) => {
   })
 }
 
-let formRegister = (req, res, next) => {
-  res.render('formRegister', {title: "mediary"})
-}
-
 let proccessRegister = (req, res, next) => {
   ModelInstitution.register({
     IID: req.body.iid,
     name: req.body.name,
     address: req.body.address,
-    type: req.body.type,
+    category: req.body.category,
     username: req.body.username
   }, req.body.password, function(err, result) {
+    console.log(result);
     if (err) {
-      res.render('/register', {alert: 'Registration unsuccessfull'})
+      res.render('register', {alert: 'Registration unsuccessfull'})
     } else {
       passport.authenticate('local')(req, res, function(){
         req.session.save(function (err, next) {
           if (err) return next(err)
-          res.redirect('/patient')
+          res.redirect('/dashboard')
         })
       })
     }
@@ -55,8 +51,7 @@ let proccessRegister = (req, res, next) => {
 
 module.exports = {
   viewIndex: viewIndex,
-  formLogin: formLogin,
+  formRegisterAndLogin: formRegisterAndLogin,
   processLogin: processLogin,
-  formRegister: formRegister,
   proccessRegister: proccessRegister
 }
