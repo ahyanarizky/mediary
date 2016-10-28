@@ -1,6 +1,7 @@
 let indexDashboard = (req, res, next) => {
+  console.log(req);
   if (req.user) {
-    res.render('dashboard/index')
+    res.render('dashboard/index', {username: req.user.username})
   } else {
     res.redirect('/')
   }
