@@ -6,7 +6,7 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     meta(name='description', content='')
     meta(name='author', content='')
-    title SB Admin - Bootstrap Admin Template
+    title MEDiary
     // Bootstrap Core CSS
     link(href='../../css/bootstrap.min.css', rel='stylesheet')
     // Custom CSS
@@ -31,13 +31,13 @@ html(lang='en')
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='index.html') SB Admin
+          a.navbar-brand(href='index.html') MEDiary
         // Top Menu Items
         ul.nav.navbar-right.top-nav
           li.dropdown
             a.dropdown-toggle(href='#', data-toggle='dropdown')
               i.fa.fa-user
-              |  Nama Institusi 
+              |  Nama Institusi
               b.caret
             ul.dropdown-menu
               li
@@ -46,7 +46,7 @@ html(lang='en')
                   |  Profile
               li.divider
               li
-                a(href='/logout')
+                a(href='/dashboard/logout')
                   i.fa.fa-fw.fa-power-off
                   |  Log Out
         // Sidebar Menu Items - These collapse to the responsive navigation menu on small screens
@@ -61,24 +61,24 @@ html(lang='en')
                 i.fa.fa-fw.fa-users
                 |  Manage Patients
             li
-              a(href='blank-page.html')
+              a(href='/dashboard/logout')
                 i.fa.fa-fw.fa-sign-out
                 |  Log Out
       // /.navbar-collapse
-      
+
       #page-wrapper
         .container-fluid
           // Page Heading
           .row
             .col-lg-12
               h1.page-header
-                | Patiens List 
+                | Patiens List
                 small Patiens Record Management
               ol.breadcrumb
                 li.active
                   i.fa.fa-dashboard
                   |  Dashboard
-              
+
               form(role='form')
                 .form-group
                   label PID
@@ -115,7 +115,7 @@ html(lang='en')
                       input#AB(type='radio', name='blood_type', value='AB')
                       | AB
                 button.btn.btn-primary(type='submit') Submit Button
-                
+
       // jQuery
       script(src='../../js/jquery.js')
       // Bootstrap Core JavaScript

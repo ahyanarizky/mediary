@@ -2,7 +2,6 @@
 
 var express = require('express');
 var router = express.Router();
-var user = require('../models/institution.js')
 const passport = require('passport')
 
 let ModelInstitution = require('../models/institution.js')
@@ -13,7 +12,12 @@ let viewIndex = (req, res, next) => {
 }
 
 let formRegisterAndLogin = (req, res, next) => {
-  res.render('auth', {title: "mediary"})
+  console.log(req.session);
+  if (req.user) {
+    res.redirect('/dashboard')
+  } else {
+    res.render('auth', {title: "mediary"})
+  }
 }
 
 let processLogin = (req, res, next) => {
