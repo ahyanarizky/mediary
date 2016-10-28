@@ -25,14 +25,6 @@ let formRegister = (req, res, next) => {
 }
 
 let proccessRegister = (req, res, next) => {
-  ModelInstitution.create(req.body, (err, Institution) => {
-    if(err){
-      console.log(err);
-    }else {
-      res.redirect('/dashboard')
-    }
-  })
-
   ModelInstitution.register({
     IID: req.body.iid,
     name: req.body.name,
