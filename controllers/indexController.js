@@ -17,7 +17,13 @@ let formLogin = (req, res, next) => {
 }
 
 let processLogin = (req, res, next) => {
-  res.redirect('/dashboard')
+  req.session.save((err) => {
+    if(err){
+      console.log(err);
+    }else{
+      res.redirect('/dashboard')
+    }
+  })
 }
 
 let formRegister = (req, res, next) => {
@@ -26,19 +32,25 @@ let formRegister = (req, res, next) => {
 
 let proccessRegister = (req, res, next) => {
   Institution.register(new Institution({
-    IID: req.body.IID,
+    IID: req.body.iid,
     name: req.body.name,
     address: req.body.address,
     type: req.body.type,
-    username: req.body.username,
-    password: req.body.password
+    username: req.body.username
   }), req.body.password, (err, Institution) => {
-    console.log(`aa`);
     if(err){
       console.log(err);
       return res.render('register')
     }else {
-      res.redirect('/dashboard')
+      passport.authenticate('local')(req, res, () => {
+        req.session.save((err) => {
+          if(err){
+            console.log(err);
+          }else{
+            res.redirect('/dashboard')
+          }
+        })
+      })
     }
   })
 }
