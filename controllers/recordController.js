@@ -46,8 +46,14 @@ let processDeleteRecord = (req, res, next) => {
     if(err){
       console.log(err);
     }else{
-      console.log(`Data has been deleted`);
-      res.redirect('/dashboard/patient/record')
+      recordDeleted.remove((err, recordRemoved) => {
+        if(err){
+          console.log(err);
+        }else{
+          console.log(`Data has been deleted`);
+          res.redirect('/dashboard/patient/record')
+        }
+      })
     }
   })
 }

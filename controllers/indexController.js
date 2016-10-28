@@ -5,11 +5,12 @@ var router = express.Router();
 var user = require('../models/institution.js')
 const passport = require('passport')
 
+
 let ModelInstitution = require('../models/institution.js')
 
 
 let viewIndex = (req, res, next) => {
-  res.render('index')
+  res.render('index', {title: "mediary"})
 }
 
 let formLogin = (req, res, next) => {
@@ -17,7 +18,13 @@ let formLogin = (req, res, next) => {
 }
 
 let processLogin = (req, res, next) => {
-  res.redirect('/dashboard')
+  req.session.save((err) => {
+    if(err){
+      console.log(err);
+    }else{
+      res.redirect('/dashboard')
+    }
+  })
 }
 
 let formRegister = (req, res, next) => {
