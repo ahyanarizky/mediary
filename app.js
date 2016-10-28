@@ -10,6 +10,14 @@ var dashboard = require('./routes/dashboard');
 var patient = require('./routes/patient');
 var record = require('./routes/record');
 
+const mongoose = require('mongoose')
+const session = require('express-session')
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+
+const institution = require('./models/institution')
+
+
 var app = express();
 
 // view engine setup

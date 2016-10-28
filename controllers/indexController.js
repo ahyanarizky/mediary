@@ -1,3 +1,10 @@
+'use strict'
+
+var express = require('express');
+var router = express.Router();
+var user = require('../models/institution.js')
+const passport = require('passport')
+
 let viewIndex = (req, res, next) => {
   res.send('viewIndex')
 }
@@ -7,7 +14,7 @@ let formLogin = (req, res, next) => {
 }
 
 let processLogin = (req, res, next) => {
-  res.send('processLogin')
+
 }
 
 let formRegister = (req, res, next) => {
