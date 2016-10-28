@@ -9,7 +9,7 @@ let viewAllPatient = (req, res, next) => {
         res.render('dashboard/patients', {title: "mediary", patients: patients})
       }
     })
-  }else {
+  } else {
     res.redirect('/')
   }
 }
@@ -48,15 +48,9 @@ let formEditPatient = (req, res, next) => {
 let processEditPatient = (req, res, next) => {
   if (req.user) {
     ModelPatient.update({
-      _id: req.body.id
-    },{
-      PID: req.body.PID,
-      name: req.body.name,
-      birthdate: req.body.birthdate,
-      address: req.body.address,
-      phone: req.body.phone,
-      BloodType: req.body.BloodType
-    }, (err, patientUpdated) => {
+      _id: req.params.id
+    }, req.body, (err, patientUpdated) => {
+      console.log(`Data has been updated`);
       if(err){
         console.log(err);
       }else{
