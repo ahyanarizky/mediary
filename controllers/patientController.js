@@ -5,13 +5,13 @@ let viewAllPatient = (req, res, next) => {
     if(err){
       console.log(err);
     }else{
-      res.render('viewAllPatient', {title: "mediary", patients: patients})
+      res.render('patients', {title: "mediary", patients: patients})
     }
   })
 }
 
 let formAddPatient = (req, res, next) => {
-  res.render('formAddPatient', {title: "mediary"})
+  res.render('new_patient', {title: "mediary"})
 }
 
 let processAddPatient = (req, res, next) => {
@@ -25,7 +25,7 @@ let processAddPatient = (req, res, next) => {
 }
 
 let formEditPatient = (req, res, next) => {
-  res.render('formEditPatient', {title: "mediary"})
+  res.render('edit_patient', {title: "mediary"})
 }
 
 let processEditPatient = (req, res, next) => {
