@@ -21,9 +21,6 @@ const ModelInstitution = require('./models/institution')
 const app = express();
 
 
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/mediary')
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -72,7 +69,7 @@ passport.use(new LocalStrategy(ModelInstitution.authenticate()))
 
 // MONGODB AND MONGOOSE
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost:27017/mediary')
+mongoose.connect('mongodb://127.0.0.1:27017/mediary')
 
 // BIND PASSPORT WITH USER MODEL (PASSPORT-LOCAL-MONGOOSE)
 passport.serializeUser(ModelInstitution.serializeUser())
