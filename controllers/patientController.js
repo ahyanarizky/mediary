@@ -3,19 +3,21 @@ let viewAllPatient = (req, res, next) => {
 }
 
 let formAddPatient = (req, res, next) => {
-  res.send('formAddPatient')
+  res.render('formAddPatient', {title: "mediary"})
 }
 
 let processAddPatient = (req, res, next) => {
-  res.send('processAddPatient')
+  res.redirect('/dashboard/patient')
 }
 
 let formEditPatient = (req, res, next) => {
-  res.send('formEditPatient')
+  res.render('formEditPatient', {title: "mediary"})
 }
 
 let processEditPatient = (req, res, next) => {
-  res.send('processEditPatient')
+  Model.update({
+    _id: req.params.id
+  }, (err, data))
 }
 
 let processDeletePatient = (req, res, next) => {

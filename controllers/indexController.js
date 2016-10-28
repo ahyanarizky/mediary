@@ -3,19 +3,25 @@ let viewIndex = (req, res, next) => {
 }
 
 let formLogin = (req, res, next) => {
-  res.send('formLogin')
+  res.render('formLogin', {title: "mediary"})
 }
 
 let processLogin = (req, res, next) => {
-  res.send('processLogin')
+  res.redirect('/dashboard')
 }
 
 let formRegister = (req, res, next) => {
-  res.send('formRegister')
+  res.render('formRegister', {title: "mediary"})
 }
 
 let proccessRegister = (req, res, next) => {
-  res.send('proccessRegister')
+  Model.create(req.body, (err, data) => {
+    if(err){
+      console.log(err);
+    }else {
+      res.redirect('/dashboard')
+    }
+  })
 }
 
 module.exports = {
