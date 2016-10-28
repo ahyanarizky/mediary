@@ -38,7 +38,8 @@ let processAddPatient = (req, res, next) => {
 
 let formEditPatient = (req, res, next) => {
   if (req.user) {
-    res.render('dashboard/edit_patient', {title: "mediary"})
+    res.render('./dashboard/edit_patient', {title: "mediary"})
+    // res.send('edit patient')
   } else {
     res.redirect('/')
   }
