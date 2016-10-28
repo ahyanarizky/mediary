@@ -5,13 +5,21 @@ let viewAllPatient = (req, res, next) => {
     if(err){
       console.log(err);
     }else{
+<<<<<<< HEAD
       res.render('dashboard/patients', {title: "mediary", patients: patients})
+=======
+      res.render('patients', {title: "mediary", patients: patients})
+>>>>>>> fd53c407e0ad6b99075427fa8c83f897986c4767
     }
   })
 }
 
 let formAddPatient = (req, res, next) => {
+<<<<<<< HEAD
   res.render('dashboard/new_patient', {title: "mediary"})
+=======
+  res.render('new_patient', {title: "mediary"})
+>>>>>>> fd53c407e0ad6b99075427fa8c83f897986c4767
 }
 
 let processAddPatient = (req, res, next) => {

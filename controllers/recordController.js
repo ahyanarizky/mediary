@@ -6,7 +6,7 @@ let viewAllRecord = (req, res, next) => {
       if(err){
         console.log(err);
       }else{
-        res.render('viewAllRecord', {title: "mediary", records: records})
+        res.render('records', {title: "mediary", records: records})
       }
     })
   } else {
@@ -16,7 +16,7 @@ let viewAllRecord = (req, res, next) => {
 
 let formAddRecord = (req, res, next) => {
   if (req.user) {
-    res.render('formAddPatient', {title: "mediary"})
+    res.render('new_record', {title: "mediary"})
   } else {
     res.redirect('/')
   }
@@ -38,7 +38,7 @@ let processAddRecord = (req, res, next) => {
 
 let formEditRecord = (req, res, next) => {
   if (req.user) {
-    res.render('formEditRecord', {title: "mediary"})
+    res.render('edit_record', {title: "mediary"})
   } else {
     res.redirect('/')
   }
