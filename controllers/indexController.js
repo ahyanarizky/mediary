@@ -1,3 +1,5 @@
+let Model = require('../models/Institution')
+
 let viewIndex = (req, res, next) => {
   res.send('viewIndex')
 }
@@ -15,7 +17,7 @@ let formRegister = (req, res, next) => {
 }
 
 let proccessRegister = (req, res, next) => {
-  Model.create(req.body, (err, data) => {
+  Model.create(req.body, (err, Institution) => {
     if(err){
       console.log(err);
     }else {
