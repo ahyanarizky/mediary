@@ -1,61 +1,85 @@
 let ModelPatient = require('../models/patient.js')
 
 let viewAllPatient = (req, res, next) => {
-  ModelPatient.find({}, (err, patients) => {
-    if(err){
-      console.log(err);
-    }else{
-      res.render('patients', {title: "mediary", patients: patients})
-    }
-  })
+  if (req.user) {
+    ModelPatient.find({}, (err, patients) => {
+      if(err){
+        console.log(err);
+      }else{
+        res.render('dashboard/patients', {title: "mediary", patients: patients})
+      }
+    })
+  } else {
+    res.redirect('/')
+  }
 }
 
 let formAddPatient = (req, res, next) => {
-  res.render('new_patient', {title: "mediary"})
+  if (req.user) {
+    res.render('dashboard/new_patient', {title: "mediary"})
+  } else {
+    res.redirect('/')
+  }
 }
 
 let processAddPatient = (req, res, next) => {
-  ModelPatient.create(req.body, (err, record) => {
-    if(err){
-      console.log(err);
-    }else{
-      res.redirect('/dashboard/patient')
-    }
-  })
+  if (req.user) {
+    ModelPatient.create(req.body, (err, record) => {
+      if(err){
+        console.log(err);
+      }else{
+        res.redirect('dashboard/patient')
+      }
+    })
+  } else {
+    res.redirect('/')
+  }
 }
 
 let formEditPatient = (req, res, next) => {
-  res.render('edit_patient', {title: "mediary"})
+  if (req.user) {
+    res.render('dashboard/edit_patient', {title: "mediary"})
+  } else {
+    res.redirect('/')
+  }
 }
 
 let processEditPatient = (req, res, next) => {
-  ModelPatient.update({
-    _id: req.params.id
-  }, req.body, (err, patientUpdated) => {
-    console.log(`Data has been updated`);
-    if(err){
-      console.log(err);
-    }else{
-      res.redirect('processEditPatient')
-    }
-  })
+  if (req.user) {
+    ModelPatient.update({
+      _id: req.params.id
+    }, req.body, (err, patientUpdated) => {
+      console.log(`Data has been updated`);
+      if(err){
+        console.log(err);
+      }else{
+        res.redirect('/')
+      }
+    })
+  } else {
+    res.redirect('/')
+  }
 }
 
 let processDeletePatient = (req, res, next) => {
-  ModelPatient.findById(req.params.id, (err, patientDeleted) => {
-    if(err){
-      console.log(err);
-    }else{
-      patientDeleted.remove((err, patientRemove) => {
-        if(err){
-          console.log(err);
-        }else{
-          console.log(`Data has been deleted !`);
-          res.redirect('/dashboard/patient')
-        }
-      })
-    }
-  })
+  if (req.user) {
+    ModelPatient.findById(req.params.id, (err, patientDeleted) => {
+      if(err){
+        console.log(err);
+      }else{
+        patientDeleted.remove((err, patientRemove) => {
+          if(err){
+            console.log(err);
+          }else{
+            console.log(`Data has been deleted !`);
+            res.redirect('/dashboard/patient')
+          }
+        })
+      }
+    })
+  } else {
+    res.redirect('/')
+  }
 }
 
 module.exports = {
