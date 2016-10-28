@@ -31,11 +31,52 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride(function (req, res) {
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    // look in urlencoded POST bodies and delete it
+    let method = req.body._method
+    delete req.body._method
+    return method
+  }
+}))
+// -----------------------------------------------------------------------------
+// ROUTE AND PASSPORT CONFIGURATION
+// -----------------------------------------------------------------------------
+
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 60000
+  }
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
 
 app.use('/', routes);
 app.use('/dashboard', dashboard);
 app.use('/dashboard/patient', patient);
 app.use('/dashboard/patient/record', record);
+
+passport.use(new LocalStrategy(user.authenticate()))
+
+
+// MONGODB AND MONGOOSE
+mongoose.Promise = global.Promise
+mongoose.connect('mongodb://localhost:27017/passport')
+
+// BIND PASSPORT WITH USER MODEL (PASSPORT-LOCAL-MONGOOSE)
+passport.serializeUser(user.serializeUser())
+passport.deserializeUser(user.deserializeUser())
+
+
+// -----------------------------------------------------------------------------
+// MISC CONFIGURATION
+// -----------------------------------------------------------------------------
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
