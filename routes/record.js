@@ -15,10 +15,10 @@ router.post('/add', controller.processAddRecord)
 router.get('/edit', controller.formEditRecord)
 
 // PROCESS EDIT RECORD
-router.put('/edit', controller.processEditRecord)
+router.put('/edit/:id', controller.processEditRecord)
 
 // PROCESS DELETE RECORD
-router.delete('/delete', controller.processDeleteRecord)
+router.delete('/delete/:id', controller.processDeleteRecord)
 
 
 module.exports = router;

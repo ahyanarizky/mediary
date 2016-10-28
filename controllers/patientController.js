@@ -1,25 +1,62 @@
+let ModelPatient = require('../models/Patient')
+let ModelRecord = require('../models/Record')
+
 let viewAllPatient = (req, res, next) => {
-  res.send('viewAllPatient')
+  ModelPatient.find({}, (err, patients) => {
+    if(err){
+      console.log(err);
+    }else{
+      res.render('viewAllPatient', {title: "mediary", patients: patients})
+    }
+  })
 }
 
 let formAddPatient = (req, res, next) => {
-  res.send('formAddPatient')
+  res.render('formAddPatient', {title: "mediary"})
 }
 
 let processAddPatient = (req, res, next) => {
-  res.send('processAddPatient')
+  ModelRecord.create(req.body, (err, record) => {
+    if(err){
+      console.log(err);
+    }else{
+      res.redirect('/dashboard/patient')
+    }
+  })
 }
 
 let formEditPatient = (req, res, next) => {
-  res.send('formEditPatient')
+  res.render('formEditPatient', {title: "mediary"})
 }
 
 let processEditPatient = (req, res, next) => {
-  res.send('processEditPatient')
+  ModelPatient.update({
+    _id: req.params.id
+  }, req.body, (err, patientUpdated) => {
+    console.log(`Data has been updated`);
+    if(err){
+      console.log(err);
+    }else{
+      res.redirect('processEditPatient')
+    }
+  })
 }
 
 let processDeletePatient = (req, res, next) => {
-  res.send('processDeletePatient')
+  ModelPatient.findById(req.params.id, (err, patientDeleted) => {
+    if(err){
+      console.log(err);
+    }else{
+      patientDeleted.remove((err, patientRemove) => {
+        if(err){
+          console.log(err);
+        }else{
+          console.log(`Data has been deleted !`);
+          res.redirect('/dashboard/patient')
+        }
+      })
+    }
+  })
 }
 
 module.exports = {
