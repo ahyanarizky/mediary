@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override')
 
 const routes = require('./routes/index');
+const auth = require('./routes/auth')
 const dashboard = require('./routes/dashboard');
 const patient = require('./routes/patient');
 const record = require('./routes/record');
@@ -19,6 +20,11 @@ const LocalStrategy = require('passport-local').Strategy
 const ModelInstitution = require('./models/institution')
 
 const app = express();
+
+
+// MONGODB AND MONGOOSE
+mongoose.Promise = global.Promise
+mongoose.connect('mongodb://localhost/mediary')
 
 
 // view engine setup
@@ -59,17 +65,13 @@ app.use(passport.session())
 
 
 app.use('/', routes);
+app.use('/auth', auth);
 app.use('/dashboard', dashboard);
 app.use('/dashboard/patient', patient);
 app.use('/dashboard/patient/record', record);
 
 
 passport.use(new LocalStrategy(ModelInstitution.authenticate()))
-
-
-// MONGODB AND MONGOOSE
-mongoose.Promise = global.Promise
-mongoose.connect('mongodb://127.0.0.1:27017/mediary')
 
 // BIND PASSPORT WITH USER MODEL (PASSPORT-LOCAL-MONGOOSE)
 passport.serializeUser(ModelInstitution.serializeUser())

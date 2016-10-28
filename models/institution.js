@@ -5,7 +5,7 @@ var insSchema = mongoose.Schema({
   IID: Number,
   name: String,
   address: String,
-  type: String,
+  category: String,
   username: String,
   password: String
  });
