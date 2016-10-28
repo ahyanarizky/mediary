@@ -12,4 +12,4 @@ var insSchema = mongoose.Schema({
 
 insSchema.plugin(passportLocalMongoose)
 
-module.exports = mongoose.model('institution', insSchema);
+// module.exports = mongoose.model('institution', insSchema);
