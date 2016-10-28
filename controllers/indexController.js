@@ -5,7 +5,7 @@ var router = express.Router();
 var user = require('../models/institution.js')
 const passport = require('passport')
 
-let Model = require('../models/Institution')
+let ModelInstitution = require('../models/institution.js')
 
 
 let viewIndex = (req, res, next) => {
@@ -25,13 +25,25 @@ let formRegister = (req, res, next) => {
 }
 
 let proccessRegister = (req, res, next) => {
-  Model.create(req.body, (err, Institution) => {
-    if(err){
-      console.log(err);
-    }else {
-      res.redirect('/dashboard')
+  ModelInstitution.register({
+    IID: req.body.iid,
+    name: req.body.name,
+    address: req.body.address,
+    type: req.body.type,
+    username: req.body.username
+  }, req.body.password, function(err, result) {
+    if (err) {
+      res.render('/register', {alert: 'Registration unsuccessfull'})
+    } else {
+      passport.authenticate('local')(req, res, function(){
+        req.session.save(function (err, next) {
+          if (err) return next(err)
+          res.redirect('/patient')
+        })
+      })
     }
   })
+
 }
 
 module.exports = {
