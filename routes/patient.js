@@ -14,14 +14,13 @@ router.get('/add', controller.formAddPatient)
 router.post('/add', controller.processAddPatient)
 
 // EDIT PATIENT
-router.get('/edit/:id', controller.formEditPatient)
+router.get('/edit', controller.formEditPatient)
 
 // PROCESS EDIT PATIENT
-// router.put('/edit/:id', controller.processEditPatient)
-router.post('/edit', controller.processEditPatient)
+router.put('/edit/:id', controller.processEditPatient)
 
 // PROCESS DELETE PATIENT
-router.get('/delete/:id', controller.processDeletePatient)
+router.delete('/delete/:id', controller.processDeletePatient)
 
 
 module.exports = router;
