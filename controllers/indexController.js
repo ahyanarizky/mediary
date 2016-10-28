@@ -1,9 +1,12 @@
+'use strict'
+
+
 let formLogin = (req, res, next) => {
   res.send('formLogin')
 }
 
 let processLogin = (req, res, next) => {
-  res.send('processLogin')
+
 }
 
 let formRegister = (req, res, next) => {

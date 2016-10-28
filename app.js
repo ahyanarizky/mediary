@@ -8,6 +8,14 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+const mongoose = require('mongoose')
+const session = require('express-session')
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+
+const institution = require('./models/institution')
+
+
 var app = express();
 
 // view engine setup
