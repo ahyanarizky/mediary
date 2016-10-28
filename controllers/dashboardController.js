@@ -7,8 +7,12 @@ let indexDashboard = (req, res, next) => {
 }
 
 let logout = (req, res, next) => {
-  req.logout()
-  res.redirect('/')
+  if (req.user) {
+    req.logout()
+    res.redirect('/')
+  } else {
+    res.redirect('/')
+  }
 }
 
 
