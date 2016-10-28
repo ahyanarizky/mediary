@@ -20,6 +20,10 @@ const institution = require('./models/institution')
 
 var app = express();
 
+
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/mediary')
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
