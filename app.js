@@ -1,14 +1,31 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override')
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+const routes = require('./routes/index');
+const auth = require('./routes/auth')
+const dashboard = require('./routes/dashboard');
+const patient = require('./routes/patient');
+const record = require('./routes/record');
 
-var app = express();
+const mongoose = require('mongoose')
+const session = require('express-session')
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+
+const ModelInstitution = require('./models/institution')
+
+const app = express();
+
+
+// MONGODB AND MONGOOSE
+mongoose.Promise = global.Promise
+mongoose.connect('mongodb://localhost/mediary')
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,8 +39,48 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(methodOverride(function (req, res) {
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    // look in urlencoded POST bodies and delete it
+    let method = req.body._method
+    delete req.body._method
+    return method
+  }
+}))
+// -----------------------------------------------------------------------------
+// ROUTE AND PASSPORT CONFIGURATION
+// -----------------------------------------------------------------------------
+
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 60000
+  }
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+
 app.use('/', routes);
-app.use('/users', users);
+app.use('/auth', auth);
+app.use('/dashboard', dashboard);
+app.use('/dashboard/patient', patient);
+app.use('/dashboard/patient/record', record);
+
+
+passport.use(new LocalStrategy(ModelInstitution.authenticate()))
+
+// BIND PASSPORT WITH USER MODEL (PASSPORT-LOCAL-MONGOOSE)
+passport.serializeUser(ModelInstitution.serializeUser())
+passport.deserializeUser(ModelInstitution.deserializeUser())
+
+
+// -----------------------------------------------------------------------------
+// MISC CONFIGURATION
+// -----------------------------------------------------------------------------
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -47,7 +104,7 @@ if (app.get('env') === 'development') {
 }
 
 // production error handler
-// no stacktraces leaked to user
+// no stacktraces leaked to ModelInstitution
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {

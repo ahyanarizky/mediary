@@ -1,5 +1,82 @@
 extends layout
 
-block content
-  h1= title
-  p Welcome to #{title}
+block content 
+      // Section: intro
+      section#intro.intro
+        .intro-content
+          .container
+            .row
+              .col-lg-6
+                .wow.fadeInDown(data-wow-offset='0', data-wow-delay='0.1s')
+                  h2.h-ultra MEDiary Medical Records
+                .wow.fadeInUp(data-wow-offset='0', data-wow-delay='0.1s')
+                  h4.h-light
+                    | Track your  
+                    span.color health history
+                .well.well-trans
+                  .wow.fadeInRight(data-wow-delay='0.1s')
+                    | We are working hard for providing a good way for doctors, hospitals, and patients to their health history.
+              .col-lg-6
+                .form-wrapper
+                  .wow.fadeInRight(data-wow-duration='2s', data-wow-delay='0.2s')
+                    .panel.panel-skin
+                      .panel-heading
+                        h3.panel-title
+                          span.fa.fa-pencil-square-o
+                          |  Track Your Records
+                      .panel-body
+                        // Form Search Patients Medical Records
+                        form.contactForm.lead(action='', method='post', role='form')
+                          .row
+                            .col-xs-12
+                              .form-group
+                                label MEDiary Patients ID
+                                input#pid.form-control.input-md(type='text', name='pid', data-rule='minlen:8', data-msg='Please enter your valid MEDiary Patients ID')
+                                .validation
+                          input.btn.btn-skin.btn-block.btn-lg(type='submit', value='Submit')
+      // /Section: intro
+      // /Section: boxes
+      section#callaction.home-section.paddingtop-40
+        .container
+          .row
+            .col-md-12
+              .callaction.bg-gray
+                .row
+                  .col-md-8
+                    .wow.fadeInUp(data-wow-delay='0.1s')
+                      .cta-text
+                        h3 Be our partner
+                        p
+                          | Using MEDiary in your medical institutions can help your patients and  a lot of people tracking their health history records, and help you give a better service to the patients.
+                  .col-md-4
+                    .wow.lightSpeedIn(data-wow-delay='0.1s')
+                      .cta-btn
+                        a.btn.btn-skin.btn-lg(href='#') Contact Us
+      section#partner.home-section.paddingbot-60
+        .container.marginbot-50
+          .row
+            .col-lg-8.col-lg-offset-2
+              .wow.lightSpeedIn(data-wow-delay='0.1s')
+                .section-heading.text-center
+                  h2.h-bold Our partner
+                  p Take charge of your health today with our specially designed health packages
+              .divider-short
+        .container
+          .row
+            .col-sm-6.col-md-3
+              .partner
+                a(href='#')
+                  img(src='img/dummy/partner-1.jpg', alt='')
+            .col-sm-6.col-md-3
+              .partner
+                a(href='#')
+                  img(src='img/dummy/partner-2.jpg', alt='')
+            .col-sm-6.col-md-3
+              .partner
+                a(href='#')
+                  img(src='img/dummy/partner-3.jpg', alt='')
+            .col-sm-6.col-md-3
+              .partner
+                a(href='#')
+                  img(src='img/dummy/partner-4.jpg', alt='')
+    

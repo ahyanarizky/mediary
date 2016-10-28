@@ -1,23 +1,26 @@
 var express = require('express');
 var router = express.Router();
 var controller = require('../controllers/indexController')
+var passport = require('passport')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', controller.viewIndex);
+
+router.get('/records', (req, res, next) => {
+  if (req.user) {
+    res.render('records')
+  } else {
+    res.redirect('/')
+  }
 });
 
-// LOGIN FORM
-router.get('/login', controller.formLogin)
-
-// LOGIN PROCESS
-router.post('/login', controller.processLogin)
-
-// REGISTER FORM
-router.get('/register', controller.formRegister)
-
-//REGISTER PROCESS
-router.post('/register', controller.proccessRegister)
+router.get('/record_details', (req, res, next) => {
+  if (req.user) {
+    res.render('record_details')
+  } else {
+    res.redirect('/')
+  }  
+});
 
 
 module.exports = router;

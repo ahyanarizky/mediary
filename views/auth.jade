@@ -1,0 +1,53 @@
+extends layout
+block content
+    section.home-section.paddingtop-100
+      .container
+        ul.nav.nav-tabs
+          li.active
+            a(href='#register', data-toggle='tab', aria-expanded='true') Register
+          li
+            a(href='#signin', data-toggle='tab', aria-expanded='false') Sign In
+        - if(alert)
+          .alert.alert-dismissible.alert-success
+            button.close(type='button' data-dismiss='alert') &times;
+            p= alert
+
+        #myTabContent.tab-content
+          #register.tab-pane.fade.active.in
+            br
+            form(method='post' action='/auth/register')
+              .form-group
+                label.control-label(for='iid') Institution License Number
+                input.form-control#iid(type='text' name='iid' placeholder='Enter your license number' required)
+              .form-group
+                label.control-label(for='name') Institution Name
+                input.form-control#name(type='text' name='name' placeholder='Enter your institution name' required)
+              .form-group
+                label.control-label(for='address') Address
+                input.form-control#address(type='text' name='address' placeholder='Enter your institution address' required)
+              .form-group
+                label.control-label(for='category') Category
+                select.form-control#type(name='category')
+                  option(value='clinic') Clinic
+                  option(value='hospital') Hospital
+                  option(value='doctor') Private Doctor
+              .form-group
+                label.control-label(for='username') Username
+                input.form-control#username(type='text' name='username' placeholder='Enter your username' required)
+              .form-group
+                label.control-label(for='password') Password
+                input.form-control#password(type='password' name='password' placeholder='Enter your password' required)
+              .form-group
+                button.btn.btn-primary(type='submit') Submit
+
+          #signin.tab-pane.fade
+            br
+            form(method='post' action='/auth/login')
+              .form-group
+                label.control-label(for='username') Username
+                input.form-control#username(type='text' name='username' placeholder='Enter your username' required)
+              .form-group
+                label.control-label(for='password') Password
+                input.form-control#password(type='password' name='password' placeholder='Enter your password' required)
+              .form-group
+                button.btn.btn-primary(type='submit') Submit
