@@ -32,6 +32,26 @@ let proccessRegister = (req, res, next) => {
       res.redirect('/dashboard')
     }
   })
+
+  ModelInstitution.register({
+    IID: req.body.iid,
+    name: req.body.name,
+    address: req.body.address,
+    type: req.body.type,
+    username: req.body.username
+  }, req.body.password, function(err, result) {
+    if (err) {
+      res.render('/register', {alert: 'Registration unsuccessfull'})
+    } else {
+      passport.authenticate('local')(req, res, function(){
+        req.session.save(function (err, next) {
+          if (err) return next(err)
+          res.redirect('/patient')
+        })
+      })
+    }
+  })
+
 }
 
 module.exports = {
