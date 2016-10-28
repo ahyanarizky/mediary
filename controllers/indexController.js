@@ -1,3 +1,7 @@
+let viewIndex = (req, res, next) => {
+  res.send('viewIndex')
+}
+
 let formLogin = (req, res, next) => {
   res.send('formLogin')
 }
@@ -15,6 +19,7 @@ let proccessRegister = (req, res, next) => {
 }
 
 module.exports = {
+  viewIndex: viewIndex,
   formLogin: formLogin,
   processLogin: processLogin,
   formRegister: formRegister,
