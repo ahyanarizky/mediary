@@ -5,19 +5,28 @@ let viewAllPatient = (req, res, next) => {
     if(err){
       console.log(err);
     }else{
-      res.render('viewAllPatient', {title: "mediary", patients: patients})
+      res.render('dashboard/patients', {title: "mediary", patients: patients})
     }
   })
 }
 
 let formAddPatient = (req, res, next) => {
-  res.render('formAddPatient', {title: "mediary"})
+  res.render('dashboard/new_patient', {title: "mediary"})
 }
 
 let processAddPatient = (req, res, next) => {
-  ModelPatient.create(req.body, (err, record) => {
+  // console.log(req.body);
+  ModelPatient.create({
+    PID: req.body.PID,
+    name: req.body.name,
+    birthdate: req.body.birthdate,
+    address: req.body.address,
+    phone: req.body.phone,
+    BloodType: req.body.BloodType
+  }, (err, record) => {
     if(err){
       console.log(err);
+      // res.redirect('/dashboard/patient')
     }else{
       res.redirect('/dashboard/patient')
     }

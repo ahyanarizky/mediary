@@ -37,7 +37,7 @@ html(lang='en')
           li.dropdown
             a.dropdown-toggle(href='#', data-toggle='dropdown')
               i.fa.fa-user
-              |  Nama Institusi 
+              |  Nama Institusi
               b.caret
             ul.dropdown-menu
               li
@@ -57,7 +57,7 @@ html(lang='en')
                 i.fa.fa-fw.fa-dashboard
                 |  Dashboard
             li
-              a(href='javascript:;', data-toggle='collapse', data-target='#demo')
+              a(href='/dashboard/patient', data-toggle='collapse', data-target='#demo')
                 i.fa.fa-fw.fa-users
                 |  Manage Patients
             li
@@ -65,20 +65,20 @@ html(lang='en')
                 i.fa.fa-fw.fa-sign-out
                 |  Log Out
       // /.navbar-collapse
-      
+
       #page-wrapper
         .container-fluid
           // Page Heading
           .row
             .col-lg-12
               h1.page-header
-                | Patiens List 
+                | Patiens List
                 small Patiens Record Management
               ol.breadcrumb
                 li.active
                   i.fa.fa-dashboard
                   |  Dashboard
-              a.btn.btn-primary(href="/patient/add")
+              a.btn.btn-primary(href="/dashboard/patient/add")
                 span.glyphicon.glyphicon-plus
                 | Add new patient
               table.table.table-hover
@@ -88,26 +88,29 @@ html(lang='en')
                     th Name
                     th Address
                     th Phone Number
+                    th Birthdate
                     th Blood type
                     th Actions
                 tbody
-                  tr
-                    th 12412412
-                    th Ken Ahyana Putra
-                    th Jakarta Pusat
-                    td 08988758832
-                    td X
-                    td
-                      a.btn.btn-info(href='/dashboard/patient/detail/')
-                        span.glyphicon.glyphicon-eye-open
-                        | Details
-                      button.btn.btn-success
-                        span.glyphicon.glyphicon-edit
-                        | Edit
-                        button.btn.btn-danger
-                          span.glyphicon.glyphicon-trash
-                          | Delete 
-      
+                  - for(var i = 0 ; i < patients.length ; i++)
+                    tr
+                      td #{patients[i].PID}
+                      td #{patients[i].name}
+                      td #{patients[i].address}
+                      td #{patients[i].birthdate}
+                      td #{patients[i].phone}
+                      td #{patients[i].BloodType}
+                      td
+                        a.btn.btn-info(href='/dashboard/patient/detail/')
+                          span.glyphicon.glyphicon-eye-open
+                          | Details
+                        button.btn.btn-success
+                          span.glyphicon.glyphicon-edit
+                          | Edit
+                          button.btn.btn-danger
+                            span.glyphicon.glyphicon-trash
+                            | Delete
+
       // jQuery
       script(src='../js/jquery.js')
       // Bootstrap Core JavaScript

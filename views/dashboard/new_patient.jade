@@ -37,7 +37,7 @@ html(lang='en')
           li.dropdown
             a.dropdown-toggle(href='#', data-toggle='dropdown')
               i.fa.fa-user
-              |  Nama Institusi 
+              |  Nama Institusi
               b.caret
             ul.dropdown-menu
               li
@@ -57,7 +57,7 @@ html(lang='en')
                 i.fa.fa-fw.fa-dashboard
                 |  Dashboard
             li
-              a(href='javascript:;', data-toggle='collapse', data-target='#demo')
+              a(href='/dashboard/patient', data-toggle='collapse', data-target='#demo')
                 i.fa.fa-fw.fa-users
                 |  Manage Patients
             li
@@ -65,24 +65,24 @@ html(lang='en')
                 i.fa.fa-fw.fa-sign-out
                 |  Log Out
       // /.navbar-collapse
-      
+
       #page-wrapper
         .container-fluid
           // Page Heading
           .row
             .col-lg-12
               h1.page-header
-                | Patiens List 
+                | Patiens List
                 small Patiens Record Management
               ol.breadcrumb
                 li.active
                   i.fa.fa-dashboard
                   |  Dashboard
-              
-              form(role='form')
+
+              form(role='form', action="/dashboard/patient/add", method="post")
                 .form-group
                   label PID
-                  input.form-control(name='pid')
+                  input.form-control(type="text" name='PID')
                   p.help-block Patient's Identity Number
                 .form-group
                   label Name
@@ -92,30 +92,30 @@ html(lang='en')
                   input.form-control(type='date' name='birthdate' placeholder="Patient's Birthdate")
                 .form-group
                   label Address
-                  textarea.form-control(rows='3')
+                  input.form-control(type='text' name='address' placeholder="Patient's Address")
                 .form-group
                   label Phone Number
-                  input.form-control(name='phone_number' placeholder='Enter patient phone number')
+                  input.form-control(name='phone' placeholder='Enter patient phone number')
                 .form-group
                   label Radio Buttons
                   .radio
                     label
-                      input#A(type='radio', name='blood_type', value='A', checked='')
+                      input#A(type='radio', name='BloodType', value='A', checked='')
                       | A
                   .radio
                     label
-                      input#B(type='radio', name='blood_type', value='B')
+                      input#B(type='radio', name='BloodType', value='B')
                       | B
                   .radio
                     label
-                      input#O(type='radio', name='blood_type', value='O')
+                      input#O(type='radio', name='BloodType', value='O')
                       | O
                   .radio
                     label
-                      input#AB(type='radio', name='blood_type', value='AB')
+                      input#AB(type='radio', name='BloodType', value='AB')
                       | AB
                 button.btn.btn-primary(type='submit') Submit Button
-                
+
       // jQuery
       script(src='../../js/jquery.js')
       // Bootstrap Core JavaScript

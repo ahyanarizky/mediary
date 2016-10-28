@@ -37,7 +37,7 @@ html(lang='en')
           li.dropdown
             a.dropdown-toggle(href='#', data-toggle='dropdown')
               i.fa.fa-user
-              |  Nama Institusi 
+              |  Nama Institusi
               b.caret
             ul.dropdown-menu
               li
@@ -57,7 +57,7 @@ html(lang='en')
                 i.fa.fa-fw.fa-dashboard
                 |  Dashboard
             li
-              a(href='javascript:;', data-toggle='collapse', data-target='#demo')
+              a(href='/dashboard/patient', data-toggle='collapse', data-target='#demo')
                 i.fa.fa-fw.fa-users
                 |  Manage Patients
             li
@@ -65,14 +65,14 @@ html(lang='en')
                 i.fa.fa-fw.fa-sign-out
                 |  Log Out
       // /.navbar-collapse
-      
+
       #page-wrapper
         .container-fluid
           // Page Heading
           .row
             .col-lg-12
               h1.page-header
-                | Record Details 
+                | Record Details
                 small Patiens Record Management
               ol.breadcrumb
                 li.active
@@ -114,7 +114,7 @@ html(lang='en')
                   label Additional info
                   textarea.form-control(name='additional_info' rows='3')
                 button.btn.btn-primary(type='submit') Submit Button
-      
+
       // jQuery
       script(src='../js/jquery.js')
       // Bootstrap Core JavaScript
