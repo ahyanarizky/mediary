@@ -14,8 +14,5 @@ router.get('/record_details', (req, res, next) => {
   res.render('record_details')
 });
 
-router.get('/dashboard', (req, res, next) => {
-  res.render('dashboard/index')
-})
 
 module.exports = router;
