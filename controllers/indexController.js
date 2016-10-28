@@ -6,7 +6,7 @@ var user = require('../models/institution.js')
 const passport = require('passport')
 
 let viewIndex = (req, res, next) => {
-  res.send('viewIndex')
+  res.render('index')
 }
 
 let formLogin = (req, res, next) => {
