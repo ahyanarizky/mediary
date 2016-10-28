@@ -55,9 +55,6 @@ app.use(session({
   secret: 'secret',
   resave: false,
   saveUninitialized: false,
-  cookie: {
-    maxAge: 6000000
-  }
 }))
 
 app.use(passport.initialize())
