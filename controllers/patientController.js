@@ -34,18 +34,35 @@ let processAddPatient = (req, res, next) => {
 }
 
 let formEditPatient = (req, res, next) => {
-  res.render('formEditPatient', {title: "mediary"})
-}
-
-let processEditPatient = (req, res, next) => {
-  ModelPatient.update({
+  ModelPatient.find({
     _id: req.params.id
-  }, req.body, (err, patientUpdated) => {
-    console.log(`Data has been updated`);
+  }, (err, patients) => {
     if(err){
       console.log(err);
     }else{
-      res.redirect('processEditPatient')
+      console.log(`sadf`);
+      res.render('dashboard/edit_patient', {title: "mediary", patients: patients, id: req.params.id})
+    }
+  })
+}
+
+let processEditPatient = (req, res, next) => {
+  // console.log(req.body);
+  ModelPatient.update({
+    _id: req.body.id
+  },{
+    PID: req.body.pid,
+    name: req.body.name,
+    birthdate: req.body.birthdate,
+    address: req.body.address,
+    phone: req.body.phone,
+    BloodType: req.body.BloodType
+  }, (err, patientUpdated) => {
+    if(err){
+      console.log(err);
+    }else{
+      console.log(`Data has been updated`);
+      res.redirect('/dashboard/patient')
     }
   })
 }

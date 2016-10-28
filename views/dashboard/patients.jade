@@ -6,7 +6,7 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     meta(name='description', content='')
     meta(name='author', content='')
-    title SB Admin - Bootstrap Admin Template
+    title MEDiary
     // Bootstrap Core CSS
     link(href='../css/bootstrap.min.css', rel='stylesheet')
     // Custom CSS
@@ -31,7 +31,7 @@ html(lang='en')
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='index.html') SB Admin
+          a.navbar-brand(href='index.html') MEDiary
         // Top Menu Items
         ul.nav.navbar-right.top-nav
           li.dropdown
@@ -46,7 +46,7 @@ html(lang='en')
                   |  Profile
               li.divider
               li
-                a(href='/logout')
+                a(href='/dashboard/logout')
                   i.fa.fa-fw.fa-power-off
                   |  Log Out
         // Sidebar Menu Items - These collapse to the responsive navigation menu on small screens
@@ -61,7 +61,7 @@ html(lang='en')
                 i.fa.fa-fw.fa-users
                 |  Manage Patients
             li
-              a(href='blank-page.html')
+              a(href='/dashboard/logout')
                 i.fa.fa-fw.fa-sign-out
                 |  Log Out
       // /.navbar-collapse
@@ -104,9 +104,11 @@ html(lang='en')
                         a.btn.btn-info(href='/dashboard/patient/detail/')
                           span.glyphicon.glyphicon-eye-open
                           | Details
-                        button.btn.btn-success
-                          span.glyphicon.glyphicon-edit
-                          | Edit
+                        a(href='/dashboard/patient/edit/#{patients[i]._id}')
+                          button.btn.btn-success
+                            span.glyphicon.glyphicon-edit
+                            | Edit
+                        a(href='/dashboard/patient/delete/#{patients[i]._id}')
                           button.btn.btn-danger
                             span.glyphicon.glyphicon-trash
                             | Delete

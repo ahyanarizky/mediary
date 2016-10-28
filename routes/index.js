@@ -7,15 +7,20 @@ var passport = require('passport')
 router.get('/', controller.viewIndex);
 
 router.get('/records', (req, res, next) => {
-  res.render('records')
+  if (req.user) {
+    res.render('records')
+  } else {
+    res.redirect('/')
+  }
 });
 
 router.get('/record_details', (req, res, next) => {
-  res.render('record_details')
+  if (req.user) {
+    res.render('record_details')
+  } else {
+    res.redirect('/')
+  }  
 });
 
-router.get('/dashboard', (req, res, next) => {
-  res.render('dashboard/index')
-})
 
 module.exports = router;
