@@ -2,9 +2,12 @@
 
 var express = require('express');
 var router = express.Router();
-var user = require('../models/user.js')
+var user = require('../models/institution.js')
 const passport = require('passport')
 
+let viewIndex = (req, res, next) => {
+  res.send('viewIndex')
+}
 
 let formLogin = (req, res, next) => {
   res.send('formLogin')
@@ -23,6 +26,7 @@ let proccessRegister = (req, res, next) => {
 }
 
 module.exports = {
+  viewIndex: viewIndex,
   formLogin: formLogin,
   processLogin: processLogin,
   formRegister: formRegister,

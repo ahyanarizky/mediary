@@ -3,15 +3,13 @@ var router = express.Router();
 var controller = require('../controllers/indexController')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get('/', controller.viewIndex);
 
 // LOGIN FORM
 router.get('/login', controller.formLogin)
 
 // LOGIN PROCESS
-router.post('/login', controller.processLogin)
+router.post('/login', passport.authenticate('local'), controller.processLogin)
 
 // REGISTER FORM
 router.get('/register', controller.formRegister)
